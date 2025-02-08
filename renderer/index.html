@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipts of the week</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>This week's list</h1>
+      <div id="list">
+        <p>The list comes here</p>
+      </div>
+    </div>  
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <p id="popup-text">Popup box</p>
+        <button id="closePopup">Close</button>
+      </div>
+    </div>
+    <button id="refresh">Refresh the list</button>
+    <script src="./renderer.js" defer></script>
+  </body>
+</html>
