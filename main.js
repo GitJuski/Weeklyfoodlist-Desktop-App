@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require("electron/main");
+const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 const { db, getContent } = require("./database/database.js");
 
