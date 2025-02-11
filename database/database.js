@@ -3,13 +3,24 @@ const path = require("path");
 
 const dbPath = path.join(__dirname, "weeklyfoodlist"); // DB file path
 
-// Connecting to the database
+// Connecting to the database and creating it if it does not exist
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error("Error opening database " + err.message);
   }
   else {
-    console.log("Connected to the database");
+    // Creating table food if it does not exist
+    db.run(`CREATE TABLE IF NOT EXISTS food(
+      ID integer primary key autoincrement,
+      Title text,
+      Description text,
+      Rating integer check(Rating >= 0 and Rating <= 5),
+      Category text check(Category in ('Fish', 'Soup', 'Other'))
+    );`, (err) => {
+      if (err) {
+        console.error("Error creating a database or table " + err);
+      }
+    });
   }
 });
 

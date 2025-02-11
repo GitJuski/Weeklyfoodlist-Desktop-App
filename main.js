@@ -23,10 +23,12 @@ function createMainWindow() {
       label: "Options",
       submenu: [
         {
-          label: "Main"
+          label: "Main",
+          click: () => {mainWindow.loadFile(path.join("renderer/index.html"))}
         },
         {
-          label: "Administration"
+          label: "Administration",
+          click: () => {mainWindow.loadFile(path.join("renderer/admin.html"))}
         }
       ]
     }
@@ -38,7 +40,7 @@ function createMainWindow() {
     mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.loadFile(path.join(__dirname, "./renderer/index.html")); // Show index.html file
+  mainWindow.loadFile(path.join(__dirname, "renderer/index.html")); // Show index.html file
 
   // Send the food data from database to preload.js and on to renderer.js (backend to frontend)
   mainWindow.webContents.on("did-finish-load", () => { // This caused some trouble. Does not work without this check
@@ -54,8 +56,8 @@ function createMainWindow() {
 }
 
 // Initializes the main window
-  app.whenReady().then(() => {
-    createMainWindow();
+app.whenReady().then(() => {
+  createMainWindow();
 
 // If no windows -> create main window
   app.on("activate", () => {
@@ -70,4 +72,4 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit()
   }
-})
+});
