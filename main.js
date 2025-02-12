@@ -13,7 +13,8 @@ function createMainWindow() {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
-      contextIsolation: true
+      // Context isolation, node integration, process sandboxing, websecurity, allowRunningInsecureContent, exprerimental features, enableBlinkFeatures, allowpopups
+      // The above settings should be set according to best practices by default in this version of Electron. More on this can be found in the official documentation: https://electronjs.org/docs/latest/tutorial/security
     }
   });
 
