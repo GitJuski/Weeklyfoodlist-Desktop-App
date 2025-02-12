@@ -1,0 +1,44 @@
+body {
+  background-color: #f7f3e9;
+}
+
+.container {
+  font-family: system-ui;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.container td, .container th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.container tr:nth-child(even) {
+  background-color: #f7f3e1;
+}
+
+.container tr:hover {
+  background-color: #ddd;
+}
+
+.container th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #ff6f3f;
+  color: white;
+}
+
+.button-container {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+button {
+  background-color: #ff6f3f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}

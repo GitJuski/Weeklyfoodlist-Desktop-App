@@ -6,11 +6,25 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <!--<link rel="stylesheet" href="">-->
+    <link rel="stylesheet" href="adminStyle.css">
   </head>
     <body>
-      <button id="refresh">Refresh</button>
+      <div class="button-container">
+        <button id="refresh">Refresh</button>
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="Delete">Delete</button>
+      </div>
       <div id="container" class="container">
+        <table id="table">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Category</th>
+          </tr>
+        </table>
       </div>
       <script src="adminRenderer.js"></script>
     </body>
