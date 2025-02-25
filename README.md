@@ -38,7 +38,7 @@ This is how I've understood the process, but this is my first time using Electro
 
 I will add:
 ~~1. a programmatic creation of the database if not created~~
-2. Way to manage the data inside the database from the app ui (CRUD)
+~~2. Way to manage the data inside the database from the app ui (CRUD)~~
 
 I will tackle these when I find the time and I'm not focusing on other projects.
 

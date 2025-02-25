@@ -7,8 +7,7 @@ const dbPath = path.join(__dirname, "weeklyfoodlist"); // DB file path
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error("Error opening database " + err.message);
-  }
-  else {
+  } else {
     // Creating table food if it does not exist
     db.run(`CREATE TABLE IF NOT EXISTS food(
       ID integer primary key autoincrement,
@@ -25,16 +24,71 @@ const db = new sqlite3.Database(dbPath, (err) => {
 });
 
 // Getting all the content
-const getContent = (callback) => {
-  db.all("SELECT * FROM food;", [], (err, rows) => {
-    if (err) {
-      console.error("Error getting content " + err.message);
-      callback(err, null);
-    }
-    else {
-      callback(null, rows);
-    }
+function getContent() {
+  return new Promise((resolve, reject) => {
+    db.all("SELECT * FROM food;", (err, rows) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
   });
-};
+}
 
-module.exports = { db, getContent }; // Export db and getContent for use in main.js file and main process
+// Function for inserting new data into the database
+function createItem(data) {
+  return new Promise((resolve, reject) => {
+    const statement = db.prepare("INSERT INTO food(ID, Title, Description, Rating, Category) VALUES(NULL,?,?,?,?);");
+    statement.run(data.title, data.desc, data.rating, data.category, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+// Function for deleting items using ID
+function deleteItem(id) {
+  return new Promise((resolve, reject) => {
+    const statement = db.prepare("DELETE FROM food where ID=?;")
+    statement.run(id, (err) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+// Function for updating item data
+function updateItem(data) {
+  return new Promise((resolve, reject) => {
+    // Remove key:value pairs that have value ""
+    for (const value in data) {
+      if (data[value] === "") {
+        delete data[value];
+      }
+    }
+    const id = data.ID;
+    delete data["ID"]; // Remove the ID from the data object -> We don't need to specify it in the SET clause
+    let setToUpdate = Object.entries(data).map(([key, value]) => `${key}='${value}'`).toString(); // Create the clause -> for example [Title='Test', ...]
+    const sql = `UPDATE food SET ${setToUpdate} WHERE ID=?;`; // Insert the clause
+    const statement = db.prepare(sql); // Create the statement with the pieces put together
+    statement.run(id, (err) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+module.exports = { getContent, createItem, deleteItem, updateItem }; // Export db and getContent for use in main.js file and main process

@@ -1,9 +1,37 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
-const { db, getContent } = require("./database/database.js");
+const { getContent, createItem, deleteItem, updateItem } = require("./database/database.js");
 
 // Check environment
 const isDev = process.env.NODE_ENV !== "development";
+
+// Functions for using renderer data and database.js functions for crud operations
+async function handleCreate(_, data) {
+  console.log(data);
+  try {
+    await createItem(data);
+  } catch (err) {
+    console.error("An error occured when creating new item")
+  }
+}
+
+async function handleDelete(_, id) {
+  console.log(id);
+  try {
+    await deleteItem(id);
+  } catch (err) {
+    console.error(`Failed to delete item ${id}`, error);
+  }
+}
+
+async function handleUpdate(_, data) {
+  console.log(data);
+  try {
+    await updateItem(data); 
+  } catch (err) {
+    console.error("Error updating", err)
+  }
+}
 
 // Main window function
 function createMainWindow() {
@@ -32,6 +60,10 @@ function createMainWindow() {
           click: () => {mainWindow.loadFile(path.join("renderer/admin.html"))}
         }
       ]
+    },
+    {
+      label: "Refresh",
+      click: () => {mainWindow.reload()}
     }
   ]);
   Menu.setApplicationMenu(menu); // Use the menu
@@ -44,20 +76,21 @@ function createMainWindow() {
   mainWindow.loadFile(path.join(__dirname, "renderer/index.html")); // Show index.html file
 
   // Send the food data from database to preload.js and on to renderer.js (backend to frontend)
-  mainWindow.webContents.on("did-finish-load", () => { // This caused some trouble. Does not work without this check
-    const foods = getContent((err, rows) => {
-      if (err) {
-        console.error("Failed to get content: ", err);
-      }
-      else {
-        mainWindow.webContents.send("update-content", rows);
-      }
-    });
-  });
+  mainWindow.webContents.on("did-finish-load", async () => {
+    try {
+      const rows = await getContent();
+      mainWindow.webContents.send("update-content", rows);
+    } catch (err) {
+      console.error(err);
+    }
+  })
 }
 
 // Initializes the main window
 app.whenReady().then(() => {
+  ipcMain.on("createOperations", handleCreate);
+  ipcMain.on("deleteOperations", handleDelete);
+  ipcMain.on("updateOperations", handleUpdate);
   createMainWindow();
 
 // If no windows -> create main window
