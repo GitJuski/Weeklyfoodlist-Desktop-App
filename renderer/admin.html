@@ -14,6 +14,47 @@
         <button id="update">Update</button>
         <button id="Delete">Delete</button>
       </div>
+      <!--A MESS THAT NEEDS TO BE CLEANED-->
+      <div id="popup-container" class="unactive">
+        <button id="close-popup">X</button>
+        <div id="popup">
+          <form id="delete-form" class="unactive">
+            <label>ID: </label>
+            <input type="text" id="delete-input">
+            <br>
+            <button id="delete-button">Delete</button>
+          </form>
+          <form id="create-update-form" class="unactive">
+            <label id="update-label" class="unactive">Item ID to update: </label>
+            <input type="text" id="update-input" class="unactive">
+            <br>
+            <label>Title: </label>
+            <input type="text" id="title-input">
+            <br>
+            <label>Description: </label>
+            <input type="text" id="desc-input"> 
+            <br>
+            <label for="ratings">Rating: </label>
+            <select name="ratings" id="rating-select">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br>
+            <label for="categories">Category: </label>
+            <select name="categories" id="category-select">
+              <option value="Fish">Fish</option>
+              <option value="Soup">Soup</option>
+              <option value="Other">Other</option>
+            </select>
+            <br>
+            <button id="submit-button" class="submit-button">Submit</button>
+          </form>
+        </div>
+      </div>
       <div id="container" class="container">
         <table id="table">
           <tr>
@@ -24,44 +65,6 @@
             <th>Category</th>
           </tr>
         </table>
-      </div>
-      <!--A MESS THAT NEEDS TO BE CLEANED-->
-      <div id="popup-container" class="unactive">
-        <button id="close-popup">X</button>
-        <div id="popup">
-          <form>
-            <label id="update-label" class="unactive">Item ID to update: </label>
-            <input type="text" id="update-input" class="unactive">
-            <label>Title: </label>
-            <input type="text" id="title-input">
-            <label>Description: </label>
-            <input type="text" id="desc-input"> 
-            <label for="ratings">Rating: </label>
-            <select name="ratings" id="rating-select">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <label for="categories">Category: </label>
-            <select name="categories" id="category-select">
-              <option value="Fish">Fish</option>
-              <option value="Soup">Soup</option>
-              <option value="Other">Other</option>
-            </select>
-            <button id="submit-button" class="submit-button">Submit</button>
-          </form>
-        </div>
-        <div id="delete-container" class="unactive">
-          <button id="close-deletepopup">X</button>
-          <form>
-            <label>ID: </label>
-            <input type="text" id="delete-input">
-            <button id="delete-button" class="submit-button">Delete</button>
-          </form>
-        </div>
       </div>
       <script src="adminRenderer.js"></script>
     </body>

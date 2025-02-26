@@ -6,6 +6,9 @@ body {
   font-family: system-ui;
   border-collapse: collapse;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }
 
 .container td, .container th {
@@ -32,6 +35,7 @@ body {
 .button-container {
   padding-bottom: 20px;
   padding-top: 20px;
+  text-align: center;
 }
 
 button {
@@ -41,15 +45,41 @@ button {
   border-radius: 5px;
   font-size: 20px;
   cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
-/* visibility for testing purposes */
 .active {
-  visibility: visible;
+  z-index: 999;
 }
 
 .unactive {
   position: absolute;
   z-index: -1;
   visibility: hidden;
+}
+
+#popup-container {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 15px 25px;
+  background-color: #fffbe6;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+#popup-container #close-popup {
+  margin-bottom: 10px;
+}
+
+#create-update-form {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+#delete-form {
+  display: flex;
+  flex-direction: column;
 }

@@ -20,7 +20,7 @@ async function handleDelete(_, id) {
   try {
     await deleteItem(id);
   } catch (err) {
-    console.error(`Failed to delete item ${id}`, error);
+    console.error(`Failed to delete item ${id}`, err);
   }
 }
 

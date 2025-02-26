@@ -62,19 +62,27 @@ function handleCRUD() {
   let createOrUpdate = ""; // Track if trying to update or create
 
   const popupContainer = document.getElementById("popup-container");
+  const createUpdateForm = document.getElementById("create-update-form");
+  const deleteForm = document.getElementById("delete-form");
   const updateInput = document.getElementById("update-input");
   const updateLabel = document.getElementById("update-label");
 
   // Create button actions
   document.getElementById("create").addEventListener("click", () => {
     popupContainer.className = "active";
+    createUpdateForm.className = "active";
     createOrUpdate = "create";
+    updateInput.className = "unactive";
+    updateLabel.className = "unactive";
+    deleteForm.className = "unactive";
   });
   // The X button when form is opened
   document.getElementById("close-popup").addEventListener("click", () => {
     popupContainer.className = "unactive";
     updateInput.className = "unactive";
     updateLabel.className = "unactive";
+    createUpdateForm.className = "unactive";
+    deleteForm.className = "unactive";
   });
   // Actions for submitting the values when clicking on submit button
   document.getElementById("submit-button").addEventListener("click", () => {
@@ -115,18 +123,20 @@ function handleCRUD() {
 
   document.getElementById("update").addEventListener("click", () => {
     popupContainer.className = "active";
+    createUpdateForm.className = "active";
     createOrUpdate = "update"; // Set the tracker to update
     updateInput.className = "active";
     updateLabel.className = "active";
+    deleteForm.className = "unactive";
   });
 
-  // Delete frontend MESS
-  const deletePopup = document.getElementById("delete-container");
   document.getElementById("Delete").addEventListener("click", () => {
-    deletePopup.className = "active";
-  });
-  document.getElementById("close-deletepopup").addEventListener("click", () => {
-    deletePopup.className = "unactive";
+    popupContainer.className = "active";
+    createOrUpdate = "delete";
+    deleteForm.className = "active";
+    createUpdateForm.className = "unactive";
+    updateLabel.className = "unactive";
+    updateInput.className = "unactive";
   });
   document.getElementById("delete-button").addEventListener("click", () => {
     const id = document.getElementById("delete-input").value;
