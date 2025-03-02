@@ -42,6 +42,13 @@ I will add:
 
 I will tackle these when I find the time and I'm not focusing on other projects.
 
+## Used dependencies
+
+- Electron https://www.electronjs.org/
+- Node-sqlite3 https://github.com/TryGhost/node-sqlite3
+
+Copyright and license information can be found in LICENSE-3rd-party.md file.
+
 ## DISCLAIMER
 
 I'm not to be held accountable in events of any harm in any way caused directly or indirectly by this application. Use the content at your own risk.
